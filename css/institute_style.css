@@ -305,6 +305,7 @@ body {
 .pageBtn {
     min-width: 40px;
     width: auto;
+    flex-shrink: 0
 }
 
 .pageBtn.disabled {
