@@ -19,6 +19,8 @@
 
 * {
     outline-color: var(--brand-color);
+    outline-offset: 3px;
+    /* outline: 1px solid red; */
 }
 
 body {
@@ -71,7 +73,7 @@ body {
 .inputCover input {
     width: 100%;
     border-radius: var(--size);
-
+    outline-offset: 0;
     height: 100%;
     padding: var(--size-s);
     border: 1px solid #fafafa;
@@ -105,14 +107,15 @@ body {
     position: relative;
     border: rgb(224, 224, 224);
     opacity: 0;
-    padding-inline: var(--size-m);
+    padding-inline: var(--size-l);
+    visibility: hidden;
     overflow: hidden;
     overflow: clip;
     height: 0;
     transition: all 0.3s ease;
     max-width: 100%;
-    width: 420px;
-    margin-inline-start: auto;
+    /* width: 420px;
+    margin-inline-start: auto; */
 }
 
 .filterBox::after {
@@ -130,22 +133,78 @@ body {
 }
 
 .filterOn .filterBox {
+    visibility: visible;
     overflow: initial;
     height: auto;
     box-shadow: 0px 0px 10px #00000017;
     border-radius: var(--size-xs);
     margin-block-start: var(--size-l);
     /* height: var(--dynamic-filter); */
-    padding-block: var(--size-m);
+    padding-block: var(--size-l);
     opacity: 1;
 }
 
+.filter_heading {
+    /* display: flex;
+    gap: 2rem; */
+}
+
 .filter_heading h5 {
-    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 36px;
     white-space: nowrap;
     letter-spacing: -0.02rem;
-    font-family: "Inter", sans-serif;
 }
+
+.form-wrapper {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.form-wrapper input,
+.form-wrapper textarea {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #cecece;
+    outline-offset: 3px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.form-wrapper label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 5px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.form-wrapper.textarea label {
+    top: 20px;
+    transform: translateY(-50%);
+}
+
+.form-wrapper input:focus+label,
+.form-wrapper textarea:focus+label,
+.form-wrapper input:not(:placeholder-shown)+label,
+.form-wrapper textarea:not(:placeholder-shown)+label {
+    top: -02px;
+    background-color: white;
+    border: 1px solid var(--brand-color);
+    font-size: 13px;
+    color: var(--brand-color);
+}
+
+.form-wrapper input:not(:placeholder-shown),
+.form-wrapper textarea:not(:placeholder-shown) {
+    border: 1px solid var(--brand-color);
+}
+
 
 #instituteSection {
     padding-block: var(--size-l);
@@ -305,13 +364,16 @@ body {
 .pageBtn {
     min-width: 40px;
     width: auto;
-    flex-shrink: 0
+    flex-shrink: 0;
 }
 
-.pageBtn.disabled {
+.pageBtn.disabled,
+.pageBtn.disabled:focus-within {
     pointer-events: none;
     background-color: #a8a8a8;
     color: white;
+    outline: none;
+    text-decoration: none;
 }
 
 .rest {
@@ -383,5 +445,9 @@ body {
 
     .inputCover {
         width: 100%;
+    }
+
+    .filterOn .filterBox {
+        padding: var(--size);
     }
 }
